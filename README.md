@@ -81,7 +81,7 @@ Sample usage - utilizing Match function:
 ```c#
 public static class MeetingExtensions
 {
-    // Could be as well 
+    // Could be as well member of Meeting class
     public static DateTime StartDateTime(this Meeting meeting)
     {
         return meeting.Match(
