@@ -1,0 +1,38 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#+
+    public const int MaxNumberOfArgs = 8;
+
+    private string tabs(int self)
+    {
+        return string.Join("", Enumerable.Repeat("    ", self));
+    }
+
+    private IEnumerable<List<string>> genericArgs()
+    {
+        return Enumerable.Range(2, MaxNumberOfArgs - 1)
+            .Select(p => Enumerable.Range(1, p).Select(num => "T" + num).ToList());
+    }
+
+    private IEnumerable<string> genericArgsFlat()
+    {
+        return genericArgs().Select(p => string.Join(", ", p));
+    }
+
+    private IEnumerable<string> argumentNames()
+    {
+        return new List<string>
+        {
+            "first",
+            "second",
+            "third",
+            "fourth",
+            "fifth",
+            "sixth",
+            "seventh",
+            "eighth"
+        };
+    }
+
+#>

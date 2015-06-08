@@ -1,0 +1,13 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ include file="Common.tt" #>
+<#@ assembly name="System.Core" #>
+namespace Panda
+{
+<#
+    var args = genericArgs().Select(p => string.Join(", ", p));
+    foreach (var arg in args)
+    {
+        WriteLine(tabs(1) + "public interface IUnion<{0}>  {{ }}", arg);
+    }
+#>
+}
