@@ -1,5 +1,5 @@
 ﻿
-namespace Panda
+namespace Panda.Union
 {
     public interface IUnion<T1, T2>  { }
     public interface IUnion<T1, T2, T3>  { }

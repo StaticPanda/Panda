@@ -1,5 +1,6 @@
 ﻿using System;
 using Panda.Samples.Union;
+using Panda.Union;
 
 namespace Panda.Samples
 {

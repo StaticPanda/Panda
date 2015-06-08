@@ -3,7 +3,7 @@
 <#@ assembly name="System.Core" #>
 using System;
 
-namespace Panda
+namespace Panda.Union
 {
     public static class MatchExtensions
     {
@@ -13,11 +13,69 @@ namespace Panda
         var actionsList = tArgs
             .Select(p => "Action<" + p + ">")
             .Zip(argumentNames(), (p, q) => p + " " + q);
+
+        var funcList = tArgs
+            .Select(p => "Func<" + p + ", TRet>")
+            .Zip(argumentNames(), (p, q) => p + " " + q);
+
+        printVoidMatchDeclaration(tArgs, actionsList);
+        printWhereConstraints(tArgs);
+        printEntryBracket();
+        printBody(tArgs, MatchType.Void);
+        printThrow();
+        printExitBracket();
+
+        printReturnMatchDeclaration(tArgs, funcList);
+        printWhereConstraints(tArgs);
+        printEntryBracket();
+        printBody(tArgs, MatchType.Return);
+        printThrow();
+        printExitBracket();
+    }
+#>
+    }
+}
+<#+
+
+    private void printVoidMatchDeclaration(IEnumerable<string> tArgs, IEnumerable<string> actionsList)
+    {
         WriteLine(tabs(2) + "public static void Match<{0}>(this IUnion<{0}> self, {1})",
             string.Join(", ", tArgs),
             string.Join(", ", actionsList));
-        WriteLine(tabs(2) + "{");
+    }
 
+    private void printWhereConstraints(List<string> tArgs)
+    {
+        foreach (var tArg in tArgs)
+        {
+            WriteLine(tabs(3) + "where {0} : class", tArg);
+        }
+    }
+
+    private void printThrow()
+    {
+        WriteLine(tabs(3) + @"throw new ArgumentException(""Could not find correct match for self"", ""self"");");
+    }
+
+    private void printEntryBracket()
+    {
+        WriteLine(tabs(2) + "{");
+    }
+
+    private void printExitBracket()
+    {
+        WriteLine(tabs(2) + "}" + Environment.NewLine);
+    }
+
+    private void printReturnMatchDeclaration(List<string> tArgs, IEnumerable<string> funcList)
+    {
+        WriteLine(tabs(2) + "public static TRet Match<{0}, TRet>(this IUnion<{0}> self, {1})",
+            string.Join(", ", tArgs),
+            string.Join(", ", funcList));
+    }
+
+    private void printBody(IEnumerable<string> tArgs, MatchType type)
+    {
         var possibleTypes = tArgs
             .Zip(argumentNames(), (TArg, ArgumentName) => new {TArg, ArgumentName})
             .Select((p, i) => new {p.TArg, p.ArgumentName, Idx = i})
@@ -25,39 +83,26 @@ namespace Panda
 
         foreach (var possibility in possibleTypes)
         {
-            WriteLine(tabs(3) + "{0}if(self is {1})", possibility.Idx != 0 ? "else " : "", possibility.TArg);
+            var tmpVarName = string.Format("maybe{0}", possibility.TArg);
+            WriteLine(tabs(3) + "{1} {0} = self as {1};", tmpVarName, possibility.TArg);
+            WriteLine(tabs(3) + "if({0} != null)", tmpVarName);
             WriteLine(tabs(3) + "{");
-            WriteLine(tabs(4) + "{0}(({1})self);", possibility.ArgumentName, possibility.TArg);
+            WriteLine(tabs(4) + "{0}{1}({2});",
+                type == MatchType.Return ? "return " : "",
+                possibility.ArgumentName,
+                tmpVarName);
+            if (type == MatchType.Void)
+            {
+                WriteLine(tabs(4) + "return;");
+            }
             WriteLine(tabs(3) + "}");
         }
-        printElseBlock();
+    }
 
-        var funcList = tArgs
-            .Select(p => "Func<" + p + ", TRet>")
-            .Zip(argumentNames(), (p, q) => p + " " + q);
-        WriteLine(tabs(2) + "public static TRet Match<{0}, TRet>(this IUnion<{0}> self, {1})",
-            string.Join(", ", tArgs),
-            string.Join(", ", funcList));
-        WriteLine(tabs(2) + "{");
-        foreach (var possibility in possibleTypes)
-        {
-            WriteLine(tabs(3) + "{0}if(self is {1})", possibility.Idx != 0 ? "else " : "", possibility.TArg);
-            WriteLine(tabs(3) + "{");
-            WriteLine(tabs(4) + "return {0}(({1})self);", possibility.ArgumentName, possibility.TArg);
-            WriteLine(tabs(3) + "}");
-        }
-        printElseBlock();
+    private enum MatchType
+    {
+        Void,
+        Return
     }
-#>
-    }
-}
-<#+
-private void printElseBlock()
-{
-    WriteLine(tabs(3) + "else");
-    WriteLine(tabs(3) + "{");
-    WriteLine(tabs(4) + @"throw new ArgumentException(""Could not find correct match for self"", ""self"");");
-    WriteLine(tabs(3) + "}");
-    WriteLine(tabs(2) + "}" + Environment.NewLine);
-}
+
 #>

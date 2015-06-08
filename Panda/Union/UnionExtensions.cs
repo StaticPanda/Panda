@@ -1,400 +1,533 @@
 ﻿
 using System;
 
-namespace Panda
+namespace Panda.Union
 {
     public static class MatchExtensions
     {
         public static void Match<T1, T2>(this IUnion<T1, T2> self, Action<T1> first, Action<T2> second)
+            where T1 : class
+            where T2 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, TRet>(this IUnion<T1, T2> self, Func<T1, TRet> first, Func<T2, TRet> second)
+            where T1 : class
+            where T2 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static void Match<T1, T2, T3>(this IUnion<T1, T2, T3> self, Action<T1> first, Action<T2> second, Action<T3> third)
+            where T1 : class
+            where T2 : class
+            where T3 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                third((T3)self);
+                third(maybeT3);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, T3, TRet>(this IUnion<T1, T2, T3> self, Func<T1, TRet> first, Func<T2, TRet> second, Func<T3, TRet> third)
+            where T1 : class
+            where T2 : class
+            where T3 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                return third((T3)self);
+                return third(maybeT3);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static void Match<T1, T2, T3, T4>(this IUnion<T1, T2, T3, T4> self, Action<T1> first, Action<T2> second, Action<T3> third, Action<T4> fourth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                third((T3)self);
+                third(maybeT3);
+                return;
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                fourth((T4)self);
+                fourth(maybeT4);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, T3, T4, TRet>(this IUnion<T1, T2, T3, T4> self, Func<T1, TRet> first, Func<T2, TRet> second, Func<T3, TRet> third, Func<T4, TRet> fourth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                return third((T3)self);
+                return third(maybeT3);
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                return fourth((T4)self);
+                return fourth(maybeT4);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static void Match<T1, T2, T3, T4, T5>(this IUnion<T1, T2, T3, T4, T5> self, Action<T1> first, Action<T2> second, Action<T3> third, Action<T4> fourth, Action<T5> fifth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                third((T3)self);
+                third(maybeT3);
+                return;
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                fourth((T4)self);
+                fourth(maybeT4);
+                return;
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                fifth((T5)self);
+                fifth(maybeT5);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, T3, T4, T5, TRet>(this IUnion<T1, T2, T3, T4, T5> self, Func<T1, TRet> first, Func<T2, TRet> second, Func<T3, TRet> third, Func<T4, TRet> fourth, Func<T5, TRet> fifth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                return third((T3)self);
+                return third(maybeT3);
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                return fourth((T4)self);
+                return fourth(maybeT4);
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                return fifth((T5)self);
+                return fifth(maybeT5);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static void Match<T1, T2, T3, T4, T5, T6>(this IUnion<T1, T2, T3, T4, T5, T6> self, Action<T1> first, Action<T2> second, Action<T3> third, Action<T4> fourth, Action<T5> fifth, Action<T6> sixth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
+            where T6 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                third((T3)self);
+                third(maybeT3);
+                return;
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                fourth((T4)self);
+                fourth(maybeT4);
+                return;
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                fifth((T5)self);
+                fifth(maybeT5);
+                return;
             }
-            else if(self is T6)
+            T6 maybeT6 = self as T6;
+            if(maybeT6 != null)
             {
-                sixth((T6)self);
+                sixth(maybeT6);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, T3, T4, T5, T6, TRet>(this IUnion<T1, T2, T3, T4, T5, T6> self, Func<T1, TRet> first, Func<T2, TRet> second, Func<T3, TRet> third, Func<T4, TRet> fourth, Func<T5, TRet> fifth, Func<T6, TRet> sixth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
+            where T6 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                return third((T3)self);
+                return third(maybeT3);
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                return fourth((T4)self);
+                return fourth(maybeT4);
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                return fifth((T5)self);
+                return fifth(maybeT5);
             }
-            else if(self is T6)
+            T6 maybeT6 = self as T6;
+            if(maybeT6 != null)
             {
-                return sixth((T6)self);
+                return sixth(maybeT6);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static void Match<T1, T2, T3, T4, T5, T6, T7>(this IUnion<T1, T2, T3, T4, T5, T6, T7> self, Action<T1> first, Action<T2> second, Action<T3> third, Action<T4> fourth, Action<T5> fifth, Action<T6> sixth, Action<T7> seventh)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
+            where T6 : class
+            where T7 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                third((T3)self);
+                third(maybeT3);
+                return;
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                fourth((T4)self);
+                fourth(maybeT4);
+                return;
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                fifth((T5)self);
+                fifth(maybeT5);
+                return;
             }
-            else if(self is T6)
+            T6 maybeT6 = self as T6;
+            if(maybeT6 != null)
             {
-                sixth((T6)self);
+                sixth(maybeT6);
+                return;
             }
-            else if(self is T7)
+            T7 maybeT7 = self as T7;
+            if(maybeT7 != null)
             {
-                seventh((T7)self);
+                seventh(maybeT7);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, T3, T4, T5, T6, T7, TRet>(this IUnion<T1, T2, T3, T4, T5, T6, T7> self, Func<T1, TRet> first, Func<T2, TRet> second, Func<T3, TRet> third, Func<T4, TRet> fourth, Func<T5, TRet> fifth, Func<T6, TRet> sixth, Func<T7, TRet> seventh)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
+            where T6 : class
+            where T7 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                return third((T3)self);
+                return third(maybeT3);
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                return fourth((T4)self);
+                return fourth(maybeT4);
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                return fifth((T5)self);
+                return fifth(maybeT5);
             }
-            else if(self is T6)
+            T6 maybeT6 = self as T6;
+            if(maybeT6 != null)
             {
-                return sixth((T6)self);
+                return sixth(maybeT6);
             }
-            else if(self is T7)
+            T7 maybeT7 = self as T7;
+            if(maybeT7 != null)
             {
-                return seventh((T7)self);
+                return seventh(maybeT7);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static void Match<T1, T2, T3, T4, T5, T6, T7, T8>(this IUnion<T1, T2, T3, T4, T5, T6, T7, T8> self, Action<T1> first, Action<T2> second, Action<T3> third, Action<T4> fourth, Action<T5> fifth, Action<T6> sixth, Action<T7> seventh, Action<T8> eighth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
+            where T6 : class
+            where T7 : class
+            where T8 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                first((T1)self);
+                first(maybeT1);
+                return;
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                second((T2)self);
+                second(maybeT2);
+                return;
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                third((T3)self);
+                third(maybeT3);
+                return;
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                fourth((T4)self);
+                fourth(maybeT4);
+                return;
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                fifth((T5)self);
+                fifth(maybeT5);
+                return;
             }
-            else if(self is T6)
+            T6 maybeT6 = self as T6;
+            if(maybeT6 != null)
             {
-                sixth((T6)self);
+                sixth(maybeT6);
+                return;
             }
-            else if(self is T7)
+            T7 maybeT7 = self as T7;
+            if(maybeT7 != null)
             {
-                seventh((T7)self);
+                seventh(maybeT7);
+                return;
             }
-            else if(self is T8)
+            T8 maybeT8 = self as T8;
+            if(maybeT8 != null)
             {
-                eighth((T8)self);
+                eighth(maybeT8);
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
         public static TRet Match<T1, T2, T3, T4, T5, T6, T7, T8, TRet>(this IUnion<T1, T2, T3, T4, T5, T6, T7, T8> self, Func<T1, TRet> first, Func<T2, TRet> second, Func<T3, TRet> third, Func<T4, TRet> fourth, Func<T5, TRet> fifth, Func<T6, TRet> sixth, Func<T7, TRet> seventh, Func<T8, TRet> eighth)
+            where T1 : class
+            where T2 : class
+            where T3 : class
+            where T4 : class
+            where T5 : class
+            where T6 : class
+            where T7 : class
+            where T8 : class
         {
-            if(self is T1)
+            T1 maybeT1 = self as T1;
+            if(maybeT1 != null)
             {
-                return first((T1)self);
+                return first(maybeT1);
             }
-            else if(self is T2)
+            T2 maybeT2 = self as T2;
+            if(maybeT2 != null)
             {
-                return second((T2)self);
+                return second(maybeT2);
             }
-            else if(self is T3)
+            T3 maybeT3 = self as T3;
+            if(maybeT3 != null)
             {
-                return third((T3)self);
+                return third(maybeT3);
             }
-            else if(self is T4)
+            T4 maybeT4 = self as T4;
+            if(maybeT4 != null)
             {
-                return fourth((T4)self);
+                return fourth(maybeT4);
             }
-            else if(self is T5)
+            T5 maybeT5 = self as T5;
+            if(maybeT5 != null)
             {
-                return fifth((T5)self);
+                return fifth(maybeT5);
             }
-            else if(self is T6)
+            T6 maybeT6 = self as T6;
+            if(maybeT6 != null)
             {
-                return sixth((T6)self);
+                return sixth(maybeT6);
             }
-            else if(self is T7)
+            T7 maybeT7 = self as T7;
+            if(maybeT7 != null)
             {
-                return seventh((T7)self);
+                return seventh(maybeT7);
             }
-            else if(self is T8)
+            T8 maybeT8 = self as T8;
+            if(maybeT8 != null)
             {
-                return eighth((T8)self);
+                return eighth(maybeT8);
             }
-            else
-            {
-                throw new ArgumentException("Could not find correct match for self", "self");
-            }
+            throw new ArgumentException("Could not find correct match for self", "self");
         }
 
     }

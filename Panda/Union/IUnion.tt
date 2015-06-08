@@ -1,7 +1,7 @@
 ﻿<#@ template debug="true" hostspecific="false" language="C#" #>
 <#@ include file="Common.tt" #>
 <#@ assembly name="System.Core" #>
-namespace Panda
+namespace Panda.Union
 {
 <#
     var args = genericArgs().Select(p => string.Join(", ", p));
