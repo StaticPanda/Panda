@@ -1,6 +1,4 @@
 using System;
-using System.CodeDom;
-using System.Text.RegularExpressions;
 using Panda.Union;
 
 namespace Panda.Samples.Union
